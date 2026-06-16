@@ -18,6 +18,9 @@ spec:
       containers:
         - name: nginx
           image: registry.access.redhat.com/ubi8/nginx-120:latest
+          command: ["/bin/bash", "-c"]
+          args:
+            - nginx -g 'daemon off;'
           ports:
             - containerPort: 8080
           resources:
