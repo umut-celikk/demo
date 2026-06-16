@@ -20,9 +20,12 @@ spec:
           image: registry.access.redhat.com/ubi8/nginx-120:latest
           command: ["/bin/bash", "-c"]
           args:
-            - nginx -g 'daemon off;'
+            - "nginx -g 'daemon off;'"
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: html
+              mountPath: /usr/share/nginx/html
           resources:
             requests:
               memory: "64Mi"
@@ -30,3 +33,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "200m"
+      volumes:
+        - name: html
+          configMap:
+            name: nginx-html
